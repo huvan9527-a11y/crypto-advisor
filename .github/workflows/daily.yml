@@ -1,0 +1,48 @@
+name: 每日操作建议
+
+on:
+  schedule:
+    - cron: "0 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-advice
+  cancel-in-progress: false
+
+jobs:
+  advise:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt --quiet
+
+      - name: 生成建议
+        run: python -W ignore advisor.py advise
+
+      - name: 推送通知
+        env:
+          SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: python notify.py
+
+      - name: 保存状态回仓库
+        run: |
+          git config user.name "advisor-bot"
+          git config user.email "advisor-bot@users.noreply.github.com"
+          git add state.json data/ reports/
+          git diff --cached --quiet || git commit -m "daily advice $(date -u +%Y-%m-%d)"
+          git push
