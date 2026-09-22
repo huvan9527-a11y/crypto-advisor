@@ -1,0 +1,32 @@
+{
+  "coins": [
+    "BTC",
+    "ETH"
+  ],
+  "capital_per_coin_usdt": {
+    "BTC": 10000,
+    "ETH": 10000
+  },
+  "backtest_start": "2020-01-01",
+  "fee_rate": 0.001,
+  "params": {
+    "ma_periods": [
+      50,
+      75,
+      100,
+      125,
+      150,
+      175,
+      200
+    ],
+    "step_pct": 25,
+    "sma_long": 200,
+    "ema_fast": 20,
+    "ema_mid": 50,
+    "rsi_n": 14,
+    "atr_n": 14,
+    "donchian_n": 20,
+    "chandelier_n": 22,
+    "chandelier_mult": 3.0
+  }
+}
