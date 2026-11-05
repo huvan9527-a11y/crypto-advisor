@@ -1,16 +1,16 @@
 {
   "BTC": {
     "current_pct": 75,
-    "last_run": "2026-11-03",
-    "last_close": 77454.2,
+    "last_run": "2026-11-04",
+    "last_close": 80508.0,
     "votes": 5,
     "note": "current_pct 为策略假定你已执行后的仓位; 若你实际未执行, 请手动改成真实仓位"
   },
   "ETH": {
     "current_pct": 75,
-    "last_run": "2026-11-03",
-    "last_close": 2274.91,
-    "votes": 4,
+    "last_run": "2026-11-04",
+    "last_close": 2424.54,
+    "votes": 5,
     "note": "current_pct 为策略假定你已执行后的仓位; 若你实际未执行, 请手动改成真实仓位"
   }
 }
